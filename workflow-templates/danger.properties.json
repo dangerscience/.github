@@ -1,6 +1,7 @@
 {
 	"name": "Danger",
 	"description": "Set up and run Danger on pull requests.",
+	"iconName": "danger",
     "categories": [
         "Automation"
     ],
