@@ -1,6 +1,9 @@
 {
 	"name": "Danger",
 	"description": "Set up and run Danger on pull requests.",
+    "categories": [
+        "Automation"
+    ],
 	"filePatterns": [
 		"^Dangerfile*"
 	]
