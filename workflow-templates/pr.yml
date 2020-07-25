@@ -1,0 +1,23 @@
+name: Pull Request
+
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  pr:
+    name: Create Pull Request
+    runs-on: ubuntu-latest
+    if: contains(github.event.comment.body, '!pr')
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Convert issue into pull request
+      run: |
+        export BRANCH=$(hub issue show -f "%I %t" ${{ github.event.issue.number }} | iconv -t ascii//TRANSLIT | sed -r 's/[^a-zA-Z0-9]+/-/g' | sed -r 's/^-+\|-+$//g' | tr A-Z a-z)
+        hub checkout -b $BRANCH
+        hub push origin $BRANCH
+        hub api repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/comments --raw-field 'body=Branch created! Run `hub pull-request -i ${{ github.event.issue.number }}` locally to convert this issue to a pull request when you have added code to the new branch.'
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+

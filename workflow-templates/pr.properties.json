@@ -1,0 +1,8 @@
+{
+	"name": "Pull Request",
+	"description": "Create a branch for a Pull Request from an issue.",
+	"iconName": "pr",
+	"categories": [
+		"Automation"
+	]
+}
